@@ -10,7 +10,7 @@ export default function Header() {
     <header className="site-header">
       <div className="container">
         <a href="#top" className="wordmark">
-          MM
+          Max Marchionda
         </a>
         <nav className="site-nav" aria-label="Primary">
           {links.map((l) => (
@@ -18,6 +18,9 @@ export default function Header() {
               {l.label}
             </a>
           ))}
+          <a className="button primary sm" href="#contact">
+            Say hi
+          </a>
         </nav>
       </div>
     </header>

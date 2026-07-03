@@ -2,27 +2,66 @@
  * DESIGN SYSTEM SEAM
  * ------------------
  * Every visual decision in this app resolves to a variable defined here.
- * When the real design system is ready, replace this file (or override
- * :root) and the entire site re-themes. Components must never hardcode
- * colors, spacing, radii, or type — only var(--*) references.
+ * Values below are Max Marchionda's design system (warm cream base,
+ * black primary accent, terracotta/coral/mustard pops) pulled from
+ * https://claude.ai/design/p/39846288-28e4-4f6e-9eaf-861834070bf4.
+ * Components must never hardcode colors, spacing, radii, or type —
+ * only var(--*) references.
  */
 :root {
-  /* Color */
-  --color-bg: #0b0c0f;
-  --color-surface: #14161b;
-  --color-surface-raised: #1c1f26;
-  --color-border: #2a2e37;
-  --color-text: #e8eaee;
-  --color-text-muted: #9aa1ac;
-  --color-text-faint: #6b7280;
-  --color-accent: #4f8cff;
-  --color-accent-soft: rgba(79, 140, 255, 0.12);
-  --color-positive: #1db954; /* spotify green, reused as "live" indicator */
+  /* ---- Warm neutrals ---- */
+  --cream-50: #fdf8f1;
+  --cream-100: #faf0e1;
+  --cream-200: #f3e3cb;
+  --sand-300: #e8d3ae;
+  --sand-400: #d9bd8d;
+
+  --ink-900: #241b15;
+  --ink-800: #362a21;
+  --ink-700: #4e3e32;
+  --ink-600: #6b5949;
+  --ink-500: #8c7863;
+  --ink-400: #a9987f;
+
+  /* ---- Brand + accents ---- */
+  --accent-black: #000000;
+  --accent-black-soft: var(--cream-200);
+  --terracotta-400: #f0855b;
+  --terracotta-500: #e8663a;
+  --terracotta-600: #cf4f26;
+  --coral-400: #ff8770;
+  --coral-500: #ff6b52;
+  --coral-600: #e84f38;
+  --mustard-300: #f6d585;
+  --mustard-400: #f0be4c;
+  --mustard-500: #e3a729;
+  --olive-400: #8a8b4e;
+  --olive-500: #6f7038;
+
+  /* ---- Semantic ---- */
+  --success-500: #5c8a4e;
+  --warning-500: #e3a729;
+  --danger-500: #d0492f;
+  --color-spotify-green: #1db954;
+
+  /* Color (seam names consumed by components) */
+  --color-bg: #fdfcf9;
+  --color-surface: #ffffff;
+  --color-surface-raised: var(--cream-200);
+  --color-border: var(--sand-300);
+  --color-border-strong: var(--sand-400);
+  --color-text: var(--ink-900);
+  --color-text-muted: var(--ink-600);
+  --color-text-faint: var(--ink-500);
+  --color-accent: var(--accent-black);
+  --color-accent-soft: var(--accent-black-soft);
+  --color-positive: var(--success-500);
 
   /* Typography */
-  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
-    "Helvetica Neue", sans-serif;
-  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --font-sans: "Plus Jakarta Sans", "Segoe UI", sans-serif;
+  --font-display: "Space Grotesk", "Arial Narrow", sans-serif;
+  --font-mono: "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
+
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
   --text-base: 1rem;
@@ -30,10 +69,20 @@
   --text-xl: 1.375rem;
   --text-2xl: 1.75rem;
   --text-3xl: 2.5rem;
-  --leading-tight: 1.2;
-  --leading-normal: 1.6;
+  --text-4xl: 3.25rem;
+
+  --leading-tight: 1.1;
+  --leading-snug: 1.25;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.7;
+
+  --tracking-tight: -0.02em;
+  --tracking-wide: 0.04em;
+  --tracking-widest: 0.12em;
+
   --weight-normal: 400;
   --weight-medium: 500;
+  --weight-semibold: 600;
   --weight-bold: 700;
 
   /* Spacing (4px scale) */
@@ -48,17 +97,24 @@
   --space-9: 6rem;
 
   /* Shape & elevation */
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 16px;
-  --shadow-raised: 0 4px 24px rgba(0, 0, 0, 0.35);
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-xl: 32px;
+  --radius-pill: 999px;
+  --border-width: 1.5px;
+
+  --shadow-sm: 0 1px 2px rgba(36, 27, 21, 0.06), 0 1px 1px rgba(36, 27, 21, 0.04);
+  --shadow-md: 0 6px 16px rgba(36, 27, 21, 0.08), 0 2px 6px rgba(36, 27, 21, 0.05);
+  --shadow-raised: 0 16px 40px rgba(36, 27, 21, 0.12), 0 4px 12px rgba(36, 27, 21, 0.06);
+  --shadow-brand: 0 10px 24px rgba(36, 27, 21, 0.28);
 
   /* Layout */
-  --container-max: 72rem;
-  --header-height: 3.5rem;
+  --container-max: 70rem;
+  --header-height: 4.25rem;
 
   /* Motion */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --duration-fast: 150ms;
-  --duration-normal: 300ms;
+  --duration-normal: 240ms;
 }

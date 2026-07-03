@@ -17,10 +17,17 @@ export default function Experience() {
               </div>
               <span className="period">{job.period}</span>
             </header>
-            <ul className="progression" aria-label="Role progression">
-              {job.progression.map((step) => (
+            <ul className="timeline" aria-label="Role progression">
+              {job.progression.map((step, i) => (
                 <li key={step.title}>
-                  {step.title} · {step.period}
+                  <div className="rail">
+                    <div className="dot" />
+                    {i < job.progression.length - 1 && <div className="line" />}
+                  </div>
+                  <div className="step">
+                    <div className="step-title">{step.title}</div>
+                    <div className="step-period">{step.period}</div>
+                  </div>
                 </li>
               ))}
             </ul>
