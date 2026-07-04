@@ -2,60 +2,76 @@
  * DESIGN SYSTEM SEAM
  * ------------------
  * Every visual decision in this app resolves to a variable defined here.
- * Values below are Max Marchionda's design system (warm cream base,
- * black primary accent, terracotta/coral/mustard pops) pulled from
- * https://claude.ai/design/p/39846288-28e4-4f6e-9eaf-861834070bf4.
+ * Dark, product-forward system — near-black surfaces, an indigo brand
+ * accent, and a warm ember accent reserved for kickers/highlights.
  * Components must never hardcode colors, spacing, radii, or type —
  * only var(--*) references.
  */
 :root {
-  /* ---- Warm neutrals ---- */
+  /* ---- Neutrals ---- */
+  --neutral-950: #08080b;
+  --neutral-900: #0e0e13;
+  --neutral-850: #16161d;
+  --neutral-800: #1d1d26;
+  --neutral-700: #2b2b36;
+  --neutral-600: #3c3c49;
+  --neutral-400: #75738a;
+  --neutral-300: #9c9ab0;
+  --neutral-200: #e1dfea;
+  --neutral-100: #e7e6ee;
+  --neutral-50: #f8f7fb;
+
+  /* ---- Brand + accents ---- */
+  --accent-700: #382bd6;
+  --accent-600: #4a3cf0;
+  --accent-500: #6d5bff;
+  --accent-400: #8b7cff;
+  --accent-300: #b3a8ff;
+  --accent-soft: rgba(109, 91, 255, 0.14);
+
+  --ember-400: #ff9466;
+  --ember-500: #ff7a45;
+  --ember-600: #e8602c;
+
+  /* ---- Warm palette (light theme) ---- */
   --cream-50: #fdf8f1;
   --cream-100: #faf0e1;
   --cream-200: #f3e3cb;
   --sand-300: #e8d3ae;
   --sand-400: #d9bd8d;
-
   --ink-900: #241b15;
   --ink-800: #362a21;
   --ink-700: #4e3e32;
   --ink-600: #6b5949;
-  --ink-500: #8c7863;
-  --ink-400: #a9987f;
-
-  /* ---- Brand + accents ---- */
-  --accent-black: #000000;
-  --accent-black-soft: var(--cream-200);
-  --terracotta-400: #f0855b;
-  --terracotta-500: #e8663a;
+  --ink-550: #7c6957;
+  --terracotta-700: #a83d1b;
   --terracotta-600: #cf4f26;
-  --coral-400: #ff8770;
-  --coral-500: #ff6b52;
-  --coral-600: #e84f38;
-  --mustard-300: #f6d585;
-  --mustard-400: #f0be4c;
-  --mustard-500: #e3a729;
-  --olive-400: #8a8b4e;
-  --olive-500: #6f7038;
+  --terracotta-500: #e8663a;
+  --terracotta-400: #f0855b;
+  --terracotta-soft: rgba(207, 79, 38, 0.12);
 
   /* ---- Semantic ---- */
-  --success-500: #5c8a4e;
-  --warning-500: #e3a729;
-  --danger-500: #d0492f;
+  --success-500: #4ade80;
+  --warning-500: #f0be4c;
+  --danger-500: #ff6b52;
   --color-spotify-green: #1db954;
 
   /* Color (seam names consumed by components) */
-  --color-bg: #fdfcf9;
-  --color-surface: #ffffff;
-  --color-surface-raised: var(--cream-200);
-  --color-border: var(--sand-300);
-  --color-border-strong: var(--sand-400);
-  --color-text: var(--ink-900);
-  --color-text-muted: var(--ink-600);
-  --color-text-faint: var(--ink-500);
-  --color-accent: var(--accent-black);
-  --color-accent-soft: var(--accent-black-soft);
+  --color-bg: var(--neutral-950);
+  --color-surface: var(--neutral-900);
+  --color-surface-raised: var(--neutral-850);
+  --color-chip: var(--neutral-800);
+  --color-border: var(--neutral-700);
+  --color-border-strong: var(--neutral-600);
+  --color-text: var(--neutral-50);
+  --color-text-muted: var(--neutral-300);
+  --color-text-faint: var(--neutral-400);
+  --color-accent: var(--accent-500);
+  --color-accent-strong: var(--accent-700);
+  --color-accent-soft: var(--accent-soft);
+  --color-tag-text: var(--accent-300);
   --color-positive: var(--success-500);
+  --color-eyebrow: var(--ember-400);
 
   /* Typography */
   --font-sans: "Plus Jakarta Sans", "Segoe UI", sans-serif;
@@ -70,6 +86,7 @@
   --text-2xl: 1.75rem;
   --text-3xl: 2.5rem;
   --text-4xl: 3.25rem;
+  --text-5xl: 4rem;
 
   --leading-tight: 1.1;
   --leading-snug: 1.25;
@@ -102,19 +119,52 @@
   --radius-lg: 22px;
   --radius-xl: 32px;
   --radius-pill: 999px;
-  --border-width: 1.5px;
+  --border-width: 1px;
 
-  --shadow-sm: 0 1px 2px rgba(36, 27, 21, 0.06), 0 1px 1px rgba(36, 27, 21, 0.04);
-  --shadow-md: 0 6px 16px rgba(36, 27, 21, 0.08), 0 2px 6px rgba(36, 27, 21, 0.05);
-  --shadow-raised: 0 16px 40px rgba(36, 27, 21, 0.12), 0 4px 12px rgba(36, 27, 21, 0.06);
-  --shadow-brand: 0 10px 24px rgba(36, 27, 21, 0.28);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.45);
+  --shadow-raised: 0 24px 60px rgba(0, 0, 0, 0.55);
+  --shadow-brand: 0 12px 32px rgba(109, 91, 255, 0.32);
 
   /* Layout */
-  --container-max: 70rem;
+  --container-max: 72rem;
   --header-height: 4.25rem;
 
   /* Motion */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --duration-fast: 150ms;
   --duration-normal: 240ms;
+  --duration-slow: 420ms;
+  --reveal-distance: 14px;
+}
+
+/**
+ * Light theme override. Applied via [data-theme="light"] on <html>,
+ * set by the no-flash inline script in index.html and kept in sync by
+ * useTheme(). Warm cream/terracotta system — the original brand
+ * identity — with an orange primary accent, distinct from dark mode's
+ * indigo. Every var below has a dark-mode value in :root above — this
+ * block only ever re-points the semantic seam names.
+ */
+[data-theme="light"] {
+  --color-bg: var(--cream-50);
+  --color-surface: #ffffff;
+  --color-surface-raised: var(--cream-200);
+  --color-chip: var(--cream-200);
+  --color-border: var(--sand-300);
+  --color-border-strong: var(--sand-400);
+  --color-text: var(--ink-900);
+  --color-text-muted: var(--ink-600);
+  --color-text-faint: var(--ink-550);
+  --color-accent: var(--terracotta-600);
+  --color-accent-strong: var(--terracotta-700);
+  --color-accent-soft: var(--terracotta-soft);
+  --color-tag-text: var(--terracotta-700);
+  --color-positive: #5c8a4e;
+  --color-eyebrow: var(--terracotta-700);
+
+  --shadow-sm: 0 1px 2px rgba(36, 27, 21, 0.06), 0 1px 1px rgba(36, 27, 21, 0.04);
+  --shadow-md: 0 8px 20px rgba(36, 27, 21, 0.08), 0 2px 6px rgba(36, 27, 21, 0.05);
+  --shadow-raised: 0 20px 50px rgba(36, 27, 21, 0.12), 0 4px 14px rgba(36, 27, 21, 0.06);
+  --shadow-brand: 0 12px 28px rgba(207, 79, 38, 0.28);
 }

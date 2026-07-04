@@ -1,11 +1,26 @@
+import { useInView } from "../hooks/useInView";
 import { education, experience } from "../data/resume";
+import { stats } from "../data/content";
 
-export default function Experience() {
+export default function TrackRecord() {
+  const { ref, inView } = useInView<HTMLElement>();
   return (
-    <section className="section" id="experience">
+    <section
+      className={`section reveal${inView ? " in-view" : ""}`}
+      id="track-record"
+      ref={ref}
+    >
       <div className="container">
-        <div className="section-kicker">Experience</div>
-        <h2 className="section-title">What I've built</h2>
+        <div className="section-kicker">Track Record</div>
+        <h2 className="section-title">What it's led to</h2>
+        <div className="stat-grid">
+          {stats.map((s) => (
+            <div key={s.label}>
+              <div className="stat-value">{s.value}</div>
+              <div className="stat-label">{s.label}</div>
+            </div>
+          ))}
+        </div>
         {experience.map((job) => (
           <article className="role-card" key={job.company}>
             <header>

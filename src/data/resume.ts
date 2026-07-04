@@ -56,6 +56,7 @@ export const experience: Experience[] = [
       { title: "Data Scientist", period: "June 2017 – June 2018" },
     ],
     highlights: [
+      "Leading engineering for a multi-team, cross-functional initiative within the business segment — partnering directly with business and technology leadership on design and delivery, and building core systems through agentic AI-driven development (AIDLC); backed by a $50M investment over two years, 8 months in and currently in beta ahead of a full production rollout with measurable business impact in 2027.",
       "Led and built an AI-powered benefits planning application that leverages machine learning to optimize health benefit configurations, surfacing recommendations through a complex business logic grid evaluated on both a plan and market basis — enabling more strategic, data-driven benefit decision-making at scale.",
       "Designed and led development of a custom web application that processes competitor ad data using a multi-modal agentic AI workflow, analyzing thousands of ads monthly to automatically surface unique insights — saving over $2M in annual operational costs.",
       "Architected and built an internal AI-powered chat experience enabling employees to query 25,000+ developer and data documentation pages, supporting 1,500+ active users and streamlining access to critical technical knowledge.",

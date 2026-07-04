@@ -1,13 +1,20 @@
-import * as Separator from "@radix-ui/react-separator";
 import { Github, Linkedin, Mail } from "lucide-react";
+import { useInView } from "../hooks/useInView";
 import { identity } from "../data/resume";
+import { contactCopy } from "../data/content";
 
 export default function Contact() {
+  const { ref, inView } = useInView<HTMLElement>();
   return (
-    <section className="section" id="contact">
+    <section
+      className={`section reveal${inView ? " in-view" : ""}`}
+      id="contact"
+      ref={ref}
+    >
       <div className="container">
-        <div className="section-kicker">Contact</div>
-        <h2 className="section-title">Say hello</h2>
+        <div className="section-kicker">{contactCopy.kicker}</div>
+        <h2 className="section-title">{contactCopy.title}</h2>
+        <p className="section-lead">{contactCopy.lead}</p>
         <div className="contact-list">
           <a className="social-link" href={`mailto:${identity.email}`}>
             <Mail />
@@ -32,10 +39,6 @@ export default function Contact() {
             LinkedIn
           </a>
         </div>
-        <Separator.Root
-          className="separator"
-          style={{ marginTop: "var(--space-7)" }}
-        />
       </div>
     </section>
   );

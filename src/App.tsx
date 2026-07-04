@@ -1,11 +1,13 @@
 import * as Tooltip from "@radix-ui/react-tooltip";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
-import Experience from "./components/Experience";
-import Skills from "./components/Skills";
-import Hobbies from "./components/Hobbies";
+import Capabilities from "./components/Capabilities";
+import Process from "./components/Process";
+import TrackRecord from "./components/TrackRecord";
+import Building from "./components/Building";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+import ThemeToggle from "./components/ThemeToggle";
 
 export default function App() {
   return (
@@ -13,12 +15,14 @@ export default function App() {
       <Header />
       <main>
         <Hero />
-        <Experience />
-        <Skills />
-        <Hobbies />
+        <Capabilities />
+        <Process />
+        <TrackRecord />
+        <Building />
         <Contact />
       </main>
       <Footer />
+      <ThemeToggle />
     </Tooltip.Provider>
   );
 }

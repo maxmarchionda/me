@@ -1,5 +1,6 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { useState } from "react";
+import { useInView } from "../hooks/useInView";
 import { collectibles, otherInterests, photos, type Photo } from "../data/hobbies";
 import SpotifyCard from "./SpotifyCard";
 
@@ -46,8 +47,13 @@ function PhotoGrid() {
 }
 
 export default function Hobbies() {
+  const { ref, inView } = useInView<HTMLElement>();
   return (
-    <section className="section" id="hobbies">
+    <section
+      className={`section reveal${inView ? " in-view" : ""}`}
+      id="hobbies"
+      ref={ref}
+    >
       <div className="container">
         <div className="section-kicker">Hobbies</div>
         <h2 className="section-title">Off the clock</h2>
