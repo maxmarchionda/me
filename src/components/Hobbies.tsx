@@ -1,7 +1,7 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { useState } from "react";
 import { useInView } from "../hooks/useInView";
-import { collectibles, otherInterests, photos, type Photo } from "../data/hobbies";
+import { otherInterests, photos, type Photo } from "../data/hobbies";
 import SpotifyCard from "./SpotifyCard";
 
 function PhotoGrid() {
@@ -61,13 +61,6 @@ export default function Hobbies() {
           <div className="hobby-card">
             <h3>Listening now</h3>
             <SpotifyCard />
-          </div>
-          <div className="hobby-card">
-            <h3>{collectibles.title}</h3>
-            <p>{collectibles.description}</p>
-            <a href={collectibles.link} target="_blank" rel="noreferrer">
-              {collectibles.linkLabel} →
-            </a>
           </div>
           <div className="hobby-card">
             <h3>Photography</h3>

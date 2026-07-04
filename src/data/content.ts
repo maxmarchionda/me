@@ -72,10 +72,15 @@ export const capabilities: Capability[] = [
     tags: ["React", "Next.js", "TypeScript", "Node.js"],
   },
   {
-    title: "Applied Data Science",
+    title: "Business Fluency",
     description:
-      "Predictive models grounded in real clinical and business outcomes, not just accuracy metrics.",
-    tags: ["Python", "Healthcare claims", "Predictive modeling"],
+      "Translating ambiguous needs into clear technical direction — comfortable in the boardroom and the codebase, sharpened by running my own business end to end.",
+    tags: [
+      "Stakeholder alignment",
+      "Requirements gathering",
+      "Executive communication",
+      "P&L ownership",
+    ],
   },
 ];
 
@@ -91,8 +96,6 @@ export const stats: Stat[] = [
   },
   { value: "$2M+", label: "saved annually via an automated ad-analysis workflow" },
   { value: "1,500+", label: "active users on an internal AI knowledge platform" },
-  { value: "450+", label: "AI projects tracked through a model discovery platform" },
-  { value: "15+", label: "business units onboarded to enterprise ML infrastructure" },
 ];
 
 export const building = {

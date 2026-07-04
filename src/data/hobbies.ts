@@ -16,19 +16,11 @@ export const photos: Photo[] = [
   // { src: "/photos/north-shore.jpg", alt: "Lake Superior, North Shore", aspectRatio: "3 / 2" },
 ];
 
-export const collectibles = {
-  title: "Collectibles & Someday Cards",
-  description:
-    "Building Someday Cards — buying, grading, and selling trading cards, plus Signal, a pricing engine for graded cards.",
-  link: "https://somedaycards.com", // TODO: confirm URL
-  linkLabel: "Someday Cards",
-};
-
 export const otherInterests = [
-  "Photography",
-  "Music",
-  "Collectibles",
+  "Being a Dad",
   "Cooking",
-  "App Development",
   "Video Games",
+  "Biking",
+  "Working Out",
+  "Slinging Slabbies",
 ];

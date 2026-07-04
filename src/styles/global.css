@@ -114,16 +114,36 @@ a {
   gap: var(--space-6);
 }
 
-.site-nav a {
+.site-nav a:not(.button) {
+  position: relative;
   color: var(--color-text-muted);
   font-size: var(--text-sm);
   font-weight: var(--weight-medium);
   transition: color var(--duration-fast) var(--ease-out);
 }
 
-.site-nav a:hover {
+.site-nav a:not(.button)::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  height: 2px;
+  border-radius: var(--radius-pill);
+  background: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform var(--duration-normal) var(--ease-out);
+}
+
+.site-nav a:not(.button):hover {
   color: var(--color-text);
   text-decoration: none;
+}
+
+.site-nav a:not(.button):hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
 }
 
 /* ---------- Mobile nav ---------- */
@@ -183,15 +203,35 @@ a {
   gap: var(--space-5);
 }
 
-.mobile-nav a {
+.mobile-nav a:not(.button) {
+  position: relative;
   color: var(--color-text);
   font-family: var(--font-display);
   font-size: var(--text-xl);
   font-weight: var(--weight-medium);
 }
 
-.mobile-nav a:hover {
+.mobile-nav a:not(.button)::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -5px;
+  height: 2px;
+  border-radius: var(--radius-pill);
+  background: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform var(--duration-normal) var(--ease-out);
+}
+
+.mobile-nav a:not(.button):hover {
   color: var(--color-accent);
+}
+
+.mobile-nav a:not(.button):hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
 }
 
 .mobile-nav .button {
@@ -238,6 +278,7 @@ a {
 
 .button.primary:hover {
   border-color: transparent;
+  color: var(--neutral-50);
   filter: brightness(1.08);
 }
 
