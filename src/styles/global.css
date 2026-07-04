@@ -96,6 +96,9 @@ a {
 }
 
 .site-header .wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
   font-family: var(--font-mono);
   font-weight: var(--weight-medium);
   font-size: var(--text-sm);
@@ -106,6 +109,24 @@ a {
 .site-header .wordmark:hover {
   color: var(--color-text);
   text-decoration: none;
+}
+
+.site-logo {
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: var(--radius-sm);
+}
+
+.site-logo.logo-light {
+  display: none;
+}
+
+[data-theme="light"] .site-logo.logo-dark {
+  display: none;
+}
+
+[data-theme="light"] .site-logo.logo-light {
+  display: block;
 }
 
 .site-nav {
