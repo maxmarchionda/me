@@ -11,7 +11,10 @@ export default function ThemeToggle() {
     <Tooltip.Root>
       <Tooltip.Trigger asChild>
         <button className="theme-fab" onClick={toggle} aria-label={label}>
-          {isDark ? <Sun aria-hidden /> : <Moon aria-hidden />}
+          <span className="theme-icon-swap" aria-hidden="true">
+            <Sun data-visible={isDark} />
+            <Moon data-visible={!isDark} />
+          </span>
         </button>
       </Tooltip.Trigger>
       <Tooltip.Portal>

@@ -1,6 +1,7 @@
 import { useInView } from "../hooks/useInView";
 import { education, experience } from "../data/resume";
 import { stats } from "../data/content";
+import NumberFlow from "./smoothui/NumberFlow";
 
 export default function TrackRecord() {
   const { ref, inView } = useInView<HTMLElement>();
@@ -16,7 +17,7 @@ export default function TrackRecord() {
         <div className="stat-grid">
           {stats.map((s) => (
             <div key={s.label}>
-              <div className="stat-value">{s.value}</div>
+              <div className="stat-value"><NumberFlow value={s.value} /></div>
               <div className="stat-label">{s.label}</div>
             </div>
           ))}
@@ -46,11 +47,21 @@ export default function TrackRecord() {
                 </li>
               ))}
             </ul>
-            <ul className="highlights">
-              {job.highlights.map((h) => (
+            <ul className="highlights highlights-primary">
+              {job.highlights.slice(0, 3).map((h) => (
                 <li key={h.slice(0, 40)}>{h}</li>
               ))}
             </ul>
+            {job.highlights.length > 3 && (
+              <details className="role-more">
+                <summary>More engineering work <span aria-hidden="true">+{job.highlights.length - 3}</span></summary>
+                <ul className="highlights">
+                  {job.highlights.slice(3).map((h) => (
+                    <li key={h.slice(0, 40)}>{h}</li>
+                  ))}
+                </ul>
+              </details>
+            )}
           </article>
         ))}
         <p className="education">

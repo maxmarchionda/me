@@ -1,9 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 
 /**
- * Tracks whether an element is in the viewport, toggling back to false when
- * it scrolls back out — so scroll-reveal animations replay both scrolling
- * down into a section and scrolling back up past it.
+ * Tracks the first time an element enters the viewport. Reveals run once so
+ * content stays stable when visitors reverse scroll direction.
  *
  * Threshold defaults to 0 (any overlap counts) rather than a ratio like 0.2:
  * a ratio threshold is a fraction of the *target's own height*, so a section
@@ -21,7 +20,11 @@ export function useInView<T extends HTMLElement>(threshold = 0) {
     if (!node) return;
 
     const observer = new IntersectionObserver(
-      ([entry]) => setInView(entry.isIntersecting),
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        setInView(true);
+        observer.unobserve(entry.target);
+      },
       { threshold, rootMargin: "0px 0px -10% 0px" },
     );
     observer.observe(node);

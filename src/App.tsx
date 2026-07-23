@@ -13,8 +13,9 @@ import ThemeToggle from "./components/ThemeToggle";
 export default function App() {
   return (
     <Tooltip.Provider delayDuration={200}>
+      <a className="skip-link" href="#main-content">Skip to content</a>
       <Header />
-      <main>
+      <main id="main-content">
         <Hero />
         <Capabilities />
         <Process />

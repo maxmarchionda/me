@@ -1,6 +1,7 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import Button from "./ui/Button";
 
 const links = [
   { href: "#capabilities", label: "What I Do" },
@@ -26,9 +27,7 @@ export default function Header() {
               {l.label}
             </a>
           ))}
-          <a className="button primary sm" href="#contact">
-            Let's talk
-          </a>
+          <Button variant="primary" size="sm" href="#contact">Get in touch</Button>
         </nav>
 
         <Dialog.Root open={open} onOpenChange={setOpen}>
@@ -60,13 +59,9 @@ export default function Header() {
                     {l.label}
                   </a>
                 ))}
-                <a
-                  className="button primary"
-                  href="#contact"
-                  onClick={() => setOpen(false)}
-                >
-                  Let's talk
-                </a>
+                <Button variant="primary" href="#contact" onClick={() => setOpen(false)}>
+                  Get in touch
+                </Button>
               </nav>
             </Dialog.Content>
           </Dialog.Portal>

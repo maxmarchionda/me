@@ -10,8 +10,7 @@ function PhotoGrid() {
   if (photos.length === 0) {
     return (
       <p className="photo-empty">
-        Photo gallery coming soon — drop images into public/photos and edit
-        src/data/hobbies.ts.
+        A few favorite frames are on the way.
       </p>
     );
   }

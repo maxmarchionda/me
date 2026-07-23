@@ -99,7 +99,7 @@
 
   --weight-normal: 400;
   --weight-medium: 500;
-  --weight-semibold: 600;
+  --weight-semibold: 500;
   --weight-bold: 700;
 
   /* Spacing (4px scale) */
@@ -136,6 +136,7 @@
   --duration-normal: 240ms;
   --duration-slow: 420ms;
   --reveal-distance: 14px;
+  --focus-ring: 0 0 0 3px var(--color-accent-soft);
 }
 
 /**

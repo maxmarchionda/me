@@ -37,7 +37,6 @@ export default function SpotifyCard() {
       href={data.url}
       target="_blank"
       rel="noreferrer"
-      style={{ color: "inherit", textDecoration: "none" }}
     >
       {data.albumArt ? (
         <img

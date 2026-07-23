@@ -10,18 +10,19 @@ export default function Process() {
       ref={ref}
     >
       <div className="container">
-        <div className="section-kicker">{philosophy.kicker}</div>
-        <h2 className="section-title">{philosophy.title}</h2>
-        <p className="philosophy-intro">{philosophy.intro}</p>
-        <div className="process-grid">
+        <div className="process-heading">
+          <h2 className="section-title">{philosophy.title}</h2>
+          <p className="philosophy-intro">{philosophy.intro}</p>
+        </div>
+        <ol className="process-grid smooth-stepper">
           {process.map((p) => (
-            <div className="process-step" key={p.step}>
-              <div className="process-index">{p.step}</div>
+            <li className="process-step" key={p.step}>
+              <div className="process-index"><span>{p.step}</span></div>
               <h3>{p.title}</h3>
               <p>{p.description}</p>
-            </div>
+            </li>
           ))}
-        </div>
+        </ol>
       </div>
     </section>
   );

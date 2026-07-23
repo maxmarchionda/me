@@ -12,7 +12,6 @@ export default function Contact() {
       ref={ref}
     >
       <div className="container">
-        <div className="section-kicker">{contactCopy.kicker}</div>
         <h2 className="section-title">{contactCopy.title}</h2>
         <p className="section-lead">{contactCopy.lead}</p>
         <div className="contact-list">
