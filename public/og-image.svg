@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse">
+      <path d="M30 0H0V30" fill="none" stroke="#171713" stroke-opacity=".08"/>
+    </pattern>
+    <linearGradient id="tealInk" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0d7774" stop-opacity=".15"/>
+      <stop offset=".55" stop-color="#0d7774" stop-opacity=".9"/>
+      <stop offset="1" stop-color="#0d7774" stop-opacity=".25"/>
+    </linearGradient>
+    <linearGradient id="blackInk" x1=".1" y1="0" x2=".9" y2="1">
+      <stop offset="0" stop-color="#171713" stop-opacity=".05"/>
+      <stop offset=".55" stop-color="#171713" stop-opacity=".78"/>
+      <stop offset="1" stop-color="#171713" stop-opacity=".08"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="#f1efe8"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <path d="M704 0V630" stroke="#171713" stroke-width="3"/>
+
+  <g fill="#171713" font-family="Helvetica Neue, Arial, sans-serif">
+    <text x="66" y="76" font-size="19" font-weight="700" letter-spacing="2.3">MAX MARCHIONDA</text>
+    <text x="66" y="147" font-size="16" font-weight="700" letter-spacing="2.1">APPLIED AI · FULL-STACK · SHIPPED</text>
+    <text x="60" y="260" font-size="92" font-weight="700" letter-spacing="-6">I BUILD</text>
+    <text x="60" y="348" font-size="92" font-weight="700" letter-spacing="-6">AI PRODUCTS</text>
+    <text x="60" y="436" font-size="92" font-weight="700" letter-spacing="-6">PEOPLE USE.</text>
+    <text x="66" y="528" font-size="21" font-weight="500">
+      Machine learning, agentic AI, and full-stack engineering.
+    </text>
+    <text x="66" y="561" font-size="21" font-weight="500">
+      Complex data turned into production systems.
+    </text>
+  </g>
+
+  <g transform="translate(720 0)">
+    <circle cx="210" cy="150" r="89" fill="#ef432f"/>
+    <circle cx="397" cy="112" r="8" fill="#ef432f"/>
+    <circle cx="74" cy="489" r="12" fill="#ef432f"/>
+
+    <g fill="none" stroke="#171713" stroke-opacity=".28">
+      <path d="M28 75H438M28 555H438M64 25V602M414 25V602"/>
+      <path d="M9 185H160V130H278V210H471"/>
+      <path d="M17 451H130V510H344V425H468"/>
+      <circle cx="240" cy="322" r="218"/>
+      <circle cx="240" cy="322" r="168"/>
+    </g>
+
+    <path d="M12 548C75 516 98 457 143 427C194 394 210 317 245 250C280 185 303 176 332 208C371 250 372 322 408 358C439 390 456 443 479 472V590H12Z" fill="url(#tealInk)" stroke="#171713" stroke-width="2"/>
+    <path d="M89 585C143 538 157 481 203 454C259 421 263 337 312 281C339 250 356 278 375 337C392 389 425 426 450 477C466 511 487 535 500 548V608H89Z" fill="url(#blackInk)" stroke="#171713" stroke-width="2"/>
+
+    <g fill="none" stroke="#171713" stroke-opacity=".5" stroke-width="1.5">
+      <path d="M70 551C142 496 162 425 218 390C273 356 278 271 318 229"/>
+      <path d="M111 580C185 526 203 473 250 438C301 400 309 329 340 295"/>
+      <path d="M208 609C252 564 272 511 308 482C354 445 362 387 390 354"/>
+    </g>
+
+    <g fill="#171713" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="1.5">
+      <text x="30" y="42">SYSTEM / 01</text>
+      <text x="344" y="612">BUILD → SHIP</text>
+      <text x="342" y="234">AI / PRODUCT</text>
+    </g>
+  </g>
+
+  <rect x="15" y="15" width="1170" height="600" fill="none" stroke="#171713" stroke-width="3"/>
+</svg>
