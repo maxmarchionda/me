@@ -153,22 +153,27 @@ a {
   text-decoration: none;
 }
 
-.site-logo {
-  width: 1.75rem;
-  height: 1.75rem;
-  border-radius: var(--radius-sm);
+.site-monogram {
+  display: inline-flex;
+  align-items: baseline;
+  color: var(--color-text);
+  font-family: var(--font-display);
+  font-size: 1.85rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.12em;
 }
 
-.site-logo.logo-light {
-  display: none;
+.site-monogram > span:first-child {
+  display: inline-block;
+  transform: scaleX(0.92);
+  transform-origin: left center;
 }
 
-[data-theme="light"] .site-logo.logo-dark {
-  display: none;
-}
-
-[data-theme="light"] .site-logo.logo-light {
-  display: block;
+.site-monogram-period {
+  color: var(--color-accent);
+  font-size: 0.54em;
+  letter-spacing: 0;
 }
 
 .site-nav {

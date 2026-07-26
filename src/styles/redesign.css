@@ -108,10 +108,8 @@ body {
   text-transform: uppercase;
 }
 
-.site-logo {
-  width: 2rem;
-  height: 2rem;
-  border-radius: 0;
+.site-monogram {
+  font-size: 2rem;
 }
 
 .site-nav {

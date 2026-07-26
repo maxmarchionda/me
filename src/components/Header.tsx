@@ -18,8 +18,9 @@ export default function Header() {
     <header className="site-header">
       <div className="container">
         <a href="#top" className="wordmark">
-          <img className="site-logo logo-dark" src="/logo.svg" alt="" width={28} height={28} />
-          <img className="site-logo logo-light" src="/logo-light.svg" alt="" width={28} height={28} />
+          <span className="site-monogram" aria-hidden="true">
+            <span>M</span><span className="site-monogram-period">.</span>
+          </span>
           Max Marchionda
         </a>
         <nav className="site-nav" aria-label="Primary">
