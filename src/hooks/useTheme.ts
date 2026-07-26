@@ -17,7 +17,7 @@ function getInitialTheme(): Theme {
 
 /**
  * Defaults to the OS color-scheme preference and keeps following it live
- * until the user explicitly toggles — at which point the choice is
+ * until the user explicitly toggles. At that point the choice is
  * persisted and system changes are ignored. index.html has a matching
  * inline script that sets data-theme before first paint to avoid a flash.
  */
@@ -29,7 +29,7 @@ export function useTheme() {
     document.documentElement.style.colorScheme = theme;
     document.querySelector('meta[name="theme-color"]')?.setAttribute(
       "content",
-      theme === "dark" ? "#08080b" : "#fdf8f1",
+      theme === "dark" ? "#11110f" : "#f1efe8",
     );
   }, [theme]);
 

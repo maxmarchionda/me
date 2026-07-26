@@ -28,7 +28,7 @@ function PhotoGrid() {
             style={{ aspectRatio: photo.aspectRatio }}
             aria-label={`View ${photo.alt}`}
           >
-            <img src={photo.src} alt={photo.alt} loading="lazy" />
+            <img src={photo.src} alt={photo.alt} loading="lazy" decoding="async" />
           </button>
         ))}
       </div>

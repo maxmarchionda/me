@@ -65,7 +65,7 @@ export default function TrackRecord() {
           </article>
         ))}
         <p className="education">
-          {education.degrees.join(" · ")} — {education.school},{" "}
+          {education.degrees.join(" · ")} at {education.school},{" "}
           {education.location} ({education.period}, GPA {education.gpa})
         </p>
       </div>

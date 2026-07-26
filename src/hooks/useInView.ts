@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from "react";
  * Threshold defaults to 0 (any overlap counts) rather than a ratio like 0.2:
  * a ratio threshold is a fraction of the *target's own height*, so a section
  * taller than ~5x the viewport (common on mobile once content stacks into a
- * single column) could never reach it — leaving the section permanently
+ * single column) could never reach it, leaving the section permanently
  * hidden at opacity:0 while scrolled through it, which looked like the
  * whole page going blank.
  */

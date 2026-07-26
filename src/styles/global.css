@@ -364,6 +364,7 @@ a {
 .button:focus-visible,
 .nav-toggle:focus-visible,
 .theme-fab:focus-visible,
+.back-to-top-fab:focus-visible,
 .social-link:focus-visible,
 .photo-grid button:focus-visible {
   outline: 2px solid var(--color-accent);
@@ -1364,9 +1365,9 @@ a {
 }
 
 /* ---------- Theme toggle (floating action button) ---------- */
-.theme-fab {
+.theme-fab,
+.back-to-top-fab {
   position: fixed;
-  bottom: max(var(--space-5), env(safe-area-inset-bottom));
   right: max(var(--space-5), env(safe-area-inset-right));
   z-index: 25;
   width: 3.25rem;
@@ -1386,6 +1387,19 @@ a {
     border-color var(--duration-normal) var(--ease-out),
     background-color var(--duration-normal) var(--ease-out),
     color var(--duration-normal) var(--ease-out);
+}
+
+.theme-fab {
+  bottom: max(var(--space-5), env(safe-area-inset-bottom));
+}
+
+.back-to-top-fab {
+  bottom: calc(max(var(--space-5), env(safe-area-inset-bottom)) + 4rem);
+}
+
+.back-to-top-fab svg {
+  width: 21px;
+  height: 21px;
 }
 
 .theme-icon-swap {
@@ -1412,22 +1426,33 @@ a {
   filter: blur(0);
 }
 
-.theme-fab:hover {
+.theme-fab:hover,
+.back-to-top-fab:hover {
   border-color: var(--color-accent);
   transform: translateY(-2px);
 }
 
-.theme-fab:active {
+.theme-fab:active,
+.back-to-top-fab:active {
   transform: scale(0.94);
 }
 
 @media (max-width: 640px) {
-  .theme-fab {
-    bottom: max(var(--space-4), env(safe-area-inset-bottom));
+  .theme-fab,
+  .back-to-top-fab {
     right: max(var(--space-4), env(safe-area-inset-right));
     width: 2.75rem;
     height: 2.75rem;
   }
+
+  .theme-fab {
+    bottom: max(var(--space-4), env(safe-area-inset-bottom));
+  }
+
+  .back-to-top-fab {
+    bottom: calc(max(var(--space-4), env(safe-area-inset-bottom)) + 3.5rem);
+  }
+
   .theme-icon-swap svg {
     width: 19px;
     height: 19px;
@@ -1561,7 +1586,8 @@ a {
 [data-theme="dark"] .role-card,
 [data-theme="dark"] .building-card,
 [data-theme="dark"] .hobby-card,
-[data-theme="dark"] .theme-fab {
+[data-theme="dark"] .theme-fab,
+[data-theme="dark"] .back-to-top-fab {
   box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.055);
 }
 
@@ -1569,7 +1595,8 @@ a {
   .button:hover,
   .capability-card:hover,
   .hobby-card:hover,
-  .theme-fab:hover {
+  .theme-fab:hover,
+  .back-to-top-fab:hover {
     transform: none;
   }
 

@@ -3,12 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#fdf8f1" />
+    <meta name="theme-color" content="#f1efe8" />
     <meta
       name="description"
-      content="Max Marchionda — I build AI systems that turn complex data into products people actually use. Machine learning, agentic AI, and full-stack engineering."
+      content="Max Marchionda builds AI systems that turn complex data into products people actually use. Machine learning, agentic AI, and full-stack engineering."
     />
-    <title>Max Marchionda — Applied AI &amp; Full-Stack Engineering</title>
+    <title>Max Marchionda | Applied AI &amp; Full-Stack Engineering</title>
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" type="image/png" href="/favicon-32.png" sizes="32x32" />
     <link rel="icon" type="image/png" href="/favicon-512.png" sizes="512x512" />
@@ -23,6 +23,10 @@
               ? "light"
               : "dark";
         document.documentElement.setAttribute("data-theme", theme);
+        document.documentElement.style.colorScheme = theme;
+        document
+          .querySelector('meta[name="theme-color"]')
+          .setAttribute("content", theme === "dark" ? "#11110f" : "#f1efe8");
       })();
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />

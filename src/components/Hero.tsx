@@ -1,14 +1,12 @@
 import { identity } from "../data/resume";
 import { pitch } from "../data/content";
 import BlurFade from "./magicui/BlurFade";
-import GridPattern from "./magicui/GridPattern";
-import Terminal from "./magicui/Terminal";
+import TechnicalLandscape from "./TechnicalLandscape";
 import Button from "./ui/Button";
 
 export default function Hero() {
   return (
     <section className="hero" id="top">
-      <GridPattern />
       <div className="container">
         <div className="hero-grid">
           <div className="hero-content">
@@ -23,7 +21,9 @@ export default function Hero() {
               <a className="resume-link" href={identity.resumePdf} download>Download résumé</a>
             </BlurFade>
           </div>
-          <BlurFade className="hero-visual" delay={0.18}><Terminal /></BlurFade>
+          <BlurFade className="hero-visual" delay={0.18}>
+            <TechnicalLandscape />
+          </BlurFade>
         </div>
       </div>
     </section>

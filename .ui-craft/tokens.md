@@ -2,10 +2,11 @@
 
 ## Colors
 
-- Dark accent: indigo `#6d5bff`; background `#08080b`; raised surfaces `#16161d`.
-- Light accent: terracotta `#cf4f26`; background cream `#fdf8f1`; white surfaces.
+- Vermilion signal accent `#ef432f` in both themes.
+- Light: technical paper `#f1efe8`, black ink `#171713`, teal secondary ink `#0d7774`.
+- Dark: drafting film `#11110f`, chalk ink `#f0eee7`, cyan secondary ink `#66bbb4`.
 - Components use `--color-*` semantic aliases only; primitive ramps remain in `tokens.css`.
-- Ember/terracotta is reserved for section kickers and light-theme accent states.
+- Teal is subordinate and reserved for the landscape, rules, and quiet data details.
 
 ## Typography
 
@@ -19,14 +20,13 @@
 
 ## Radius
 
-8px small controls, 14px media/overlays, 22px cards, 32px large surfaces, pill for buttons/tags.
+2px editorial frames, 8px media, 14px overlays, pill only for the floating theme control.
 
 ## Shadows
 
-- `--shadow-sm`: quiet card separation.
-- `--shadow-md`: hover/elevated control.
-- `--shadow-raised`: terminal, dialogs, and floating theme control.
-- `--shadow-brand`: primary CTA only.
+- Most surfaces use crisp ink rules, not elevation.
+- `--shadow-raised`: dialogs and floating theme control only.
+- `--shadow-brand`: offset poster shadow on the primary CTA.
 
 ## Motion
 

@@ -18,7 +18,7 @@ export default function Capabilities() {
         <div className="capability-grid">
           {capabilities.map((c, index) => (
             <GlowHoverCard className={`capability-card capability-card-${index + 1}`} key={c.title}>
-              <span className="capability-marker" aria-hidden="true">{index === 0 ? "Core practice" : ""}</span>
+              {index === 0 && <span className="capability-marker">Core practice</span>}
               <h3>{c.title}</h3>
               <p>{c.description}</p>
               <div className="capability-tags">

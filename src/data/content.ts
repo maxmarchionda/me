@@ -4,7 +4,7 @@ export const pitch = {
   eyebrow: "Applied AI · Full-stack · Shipped in production",
   headline: "I build AI products people actually use.",
   subheadline:
-    "Machine learning, agentic AI, and full-stack engineering — turning complex data into production systems serving thousands.",
+    "Machine learning, agentic AI, and full-stack engineering. I turn complex data into production systems serving thousands.",
 };
 
 export const philosophy = {
@@ -55,7 +55,7 @@ export const capabilities: Capability[] = [
   {
     title: "Agentic AI Systems",
     description:
-      "Multi-modal agents that read, reason, and act — production workflows that replace manual analysis at scale.",
+      "Multi-modal agents that read, reason, and act. These production workflows replace manual analysis at scale.",
     tags: ["LLMs", "Agentic workflows", "AIDLC", "Azure OpenAI", "Gemini"],
   },
   {
@@ -67,13 +67,13 @@ export const capabilities: Capability[] = [
   {
     title: "Full-Stack Product",
     description:
-      "From data pipeline to polished UI — I own the whole stack so nothing gets lost in translation.",
+      "From data pipeline to polished UI, I own the whole stack so nothing gets lost in translation.",
     tags: ["React", "Next.js", "TypeScript", "Node.js"],
   },
   {
     title: "Business Fluency",
     description:
-      "Translating ambiguous needs into clear technical direction — comfortable in the boardroom and the codebase, sharpened by running my own business end to end.",
+      "Translating ambiguous needs into clear technical direction. I am comfortable in the boardroom and the codebase, sharpened by running my own business end to end.",
     tags: [
       "Stakeholder alignment",
       "Requirements gathering",
@@ -101,7 +101,7 @@ export const building = {
   kicker: "Also Building",
   title: "Owner, Someday Cards",
   description:
-    "Built Someday Cards into a $1M+ revenue TCG business — sourcing, grading, and selling " +
+    "Built Someday Cards into a $1M+ revenue TCG business by sourcing, grading, and selling " +
     "trading cards at scale. Now beginning a new venture: a vendor-centric platform bringing " +
     "real-time, AI-driven market insights and pricing tools to inventory management.",
   tags: ["$1M+ revenue", "E-commerce", "Vendor platform", "AI-driven pricing"],

@@ -2,8 +2,8 @@
  * DESIGN SYSTEM SEAM
  * ------------------
  * Every visual decision in this app resolves to a variable defined here.
- * Dark, product-forward system — near-black surfaces, an indigo brand
- * accent, and a warm ember accent reserved for kickers/highlights.
+ * Technical-poster system — drafting-film dark surfaces, paper light
+ * surfaces, vermilion signal color, and subordinate teal landscape ink.
  * Components must never hardcode colors, spacing, radii, or type —
  * only var(--*) references.
  */
@@ -57,21 +57,24 @@
   --color-spotify-green: #1db954;
 
   /* Color (seam names consumed by components) */
-  --color-bg: var(--neutral-950);
-  --color-surface: var(--neutral-900);
-  --color-surface-raised: var(--neutral-850);
-  --color-chip: var(--neutral-800);
-  --color-border: var(--neutral-700);
-  --color-border-strong: var(--neutral-600);
-  --color-text: var(--neutral-50);
-  --color-text-muted: var(--neutral-300);
-  --color-text-faint: var(--neutral-400);
-  --color-accent: var(--accent-500);
-  --color-accent-strong: var(--accent-700);
-  --color-accent-soft: var(--accent-soft);
-  --color-tag-text: var(--accent-300);
+  --color-bg: #11110f;
+  --color-surface: #191916;
+  --color-surface-raised: #22221e;
+  --color-chip: #24241f;
+  --color-border: #3b3a34;
+  --color-border-strong: #68665d;
+  --color-text: #f0eee7;
+  --color-text-muted: #b5b2a8;
+  --color-text-faint: #817f77;
+  --color-accent: #ef432f;
+  --color-accent-strong: #ff5b45;
+  --color-accent-soft: rgba(239, 67, 47, 0.14);
+  --color-tag-text: #f6a295;
   --color-positive: var(--success-500);
-  --color-eyebrow: var(--ember-400);
+  --color-eyebrow: #f47b68;
+  --color-ink-secondary: #66bbb4;
+  --color-paper-grid: rgba(240, 238, 231, 0.055);
+  --color-inverse: #11110f;
 
   /* Typography */
   --font-sans: "Plus Jakarta Sans", "Segoe UI", sans-serif;
@@ -114,17 +117,17 @@
   --space-9: 6rem;
 
   /* Shape & elevation */
-  --radius-sm: 8px;
-  --radius-md: 14px;
-  --radius-lg: 22px;
-  --radius-xl: 32px;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+  --radius-xl: 14px;
   --radius-pill: 999px;
   --border-width: 1px;
 
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
-  --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.45);
-  --shadow-raised: 0 24px 60px rgba(0, 0, 0, 0.55);
-  --shadow-brand: 0 12px 32px rgba(109, 91, 255, 0.32);
+  --shadow-sm: 0 0 0 1px rgba(240, 238, 231, 0.04);
+  --shadow-md: 6px 6px 0 rgba(0, 0, 0, 0.32);
+  --shadow-raised: 0 24px 60px rgba(0, 0, 0, 0.52);
+  --shadow-brand: 5px 5px 0 #66bbb4;
 
   /* Layout */
   --container-max: 72rem;
@@ -140,32 +143,30 @@
 }
 
 /**
- * Light theme override. Applied via [data-theme="light"] on <html>,
- * set by the no-flash inline script in index.html and kept in sync by
- * useTheme(). Warm cream/terracotta system — the original brand
- * identity — with an orange primary accent, distinct from dark mode's
- * indigo. Every var below has a dark-mode value in :root above — this
- * block only ever re-points the semantic seam names.
+ * Light theme: technical paper, black ink, vermilion signal, teal wash.
  */
 [data-theme="light"] {
-  --color-bg: var(--cream-50);
-  --color-surface: #ffffff;
-  --color-surface-raised: var(--cream-200);
-  --color-chip: var(--cream-200);
-  --color-border: var(--sand-300);
-  --color-border-strong: var(--sand-400);
-  --color-text: var(--ink-900);
-  --color-text-muted: var(--ink-600);
-  --color-text-faint: var(--ink-550);
-  --color-accent: var(--terracotta-600);
-  --color-accent-strong: var(--terracotta-700);
-  --color-accent-soft: var(--terracotta-soft);
-  --color-tag-text: var(--terracotta-700);
+  --color-bg: #f1efe8;
+  --color-surface: #f8f7f2;
+  --color-surface-raised: #e6e2d8;
+  --color-chip: #e2ded3;
+  --color-border: #c9c4b7;
+  --color-border-strong: #171713;
+  --color-text: #171713;
+  --color-text-muted: #555249;
+  --color-text-faint: #777268;
+  --color-accent: #ef432f;
+  --color-accent-strong: #c82f20;
+  --color-accent-soft: rgba(239, 67, 47, 0.11);
+  --color-tag-text: #8d2118;
   --color-positive: #5c8a4e;
-  --color-eyebrow: var(--terracotta-700);
+  --color-eyebrow: #a8281c;
+  --color-ink-secondary: #0d7774;
+  --color-paper-grid: rgba(23, 23, 19, 0.07);
+  --color-inverse: #f1efe8;
 
-  --shadow-sm: 0 1px 2px rgba(36, 27, 21, 0.06), 0 1px 1px rgba(36, 27, 21, 0.04);
-  --shadow-md: 0 8px 20px rgba(36, 27, 21, 0.08), 0 2px 6px rgba(36, 27, 21, 0.05);
-  --shadow-raised: 0 20px 50px rgba(36, 27, 21, 0.12), 0 4px 14px rgba(36, 27, 21, 0.06);
-  --shadow-brand: 0 12px 28px rgba(207, 79, 38, 0.28);
+  --shadow-sm: 0 0 0 1px rgba(23, 23, 19, 0.04);
+  --shadow-md: 6px 6px 0 rgba(23, 23, 19, 0.16);
+  --shadow-raised: 0 20px 50px rgba(23, 23, 19, 0.18);
+  --shadow-brand: 5px 5px 0 #0d7774;
 }

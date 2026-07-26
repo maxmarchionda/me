@@ -29,7 +29,7 @@ export interface Education {
 
 export const identity = {
   name: "Max Marchionda",
-  title: "Sr. Principal Software Engineer — Machine Learning",
+  title: "Sr. Principal Software Engineer, Machine Learning",
   location: "Minneapolis, MN",
   email: "maxmarchionda@gmail.com",
   phone: "(608) 498-5604",
@@ -45,7 +45,7 @@ export const experience: Experience[] = [
   {
     company: "Optum (UnitedHealth Group)",
     location: "Minneapolis, MN",
-    headline: "Sr. Principal Software Engineer — Machine Learning",
+    headline: "Sr. Principal Software Engineer, Machine Learning",
     period: "June 2017 – Present",
     progression: [
       { title: "Sr. Principal Software Engineer", period: "Feb 2024 – Present" },
@@ -56,9 +56,9 @@ export const experience: Experience[] = [
       { title: "Data Scientist", period: "June 2017 – June 2018" },
     ],
     highlights: [
-      "Leading engineering for a multi-team, cross-functional initiative within the business segment — partnering directly with business and technology leadership on design and delivery, and building core systems through agentic AI-driven development (AIDLC); backed by a $50M investment over two years, 8 months in and currently in beta ahead of a full production rollout with measurable business impact in 2027.",
-      "Led and built an AI-powered benefits planning application that leverages machine learning to optimize health benefit configurations, surfacing recommendations through a complex business logic grid evaluated on both a plan and market basis — enabling more strategic, data-driven benefit decision-making at scale.",
-      "Designed and led development of a custom web application that processes competitor ad data using a multi-modal agentic AI workflow, analyzing thousands of ads monthly to automatically surface unique insights — saving over $2M in annual operational costs.",
+      "Leading engineering for a multi-team, cross-functional initiative within the business segment. I partner directly with business and technology leadership on design and delivery while building core systems through agentic AI-driven development (AIDLC). The work is backed by a $50M investment over two years, 8 months in and currently in beta ahead of a full production rollout with measurable business impact in 2027.",
+      "Led and built an AI-powered benefits planning application that leverages machine learning to optimize health benefit configurations. It surfaces recommendations through a complex business logic grid evaluated on both a plan and market basis, enabling more strategic, data-driven benefit decision-making at scale.",
+      "Designed and led development of a custom web application that processes competitor ad data using a multi-modal agentic AI workflow. It analyzes thousands of ads monthly to automatically surface unique insights, saving over $2M in annual operational costs.",
       "Architected and built an internal AI-powered chat experience enabling employees to query 25,000+ developer and data documentation pages, supporting 1,500+ active users and streamlining access to critical technical knowledge.",
       "Led a cross-functional team in designing and deploying a model discovery and consumption platform at UHG, accelerating AI adoption across 15+ business units and enabling tracking of 450+ AI projects through the full ML lifecycle.",
       "Contributed to the design and implementation of a scalable enterprise ML development platform, optimizing model development workflows and infrastructure for production-grade deployment.",

@@ -1,6 +1,6 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Button from "./ui/Button";
 
 const links = [
@@ -12,6 +12,7 @@ const links = [
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const menuTriggerRef = useRef<HTMLButtonElement>(null);
 
   return (
     <header className="site-header">
@@ -33,6 +34,7 @@ export default function Header() {
         <Dialog.Root open={open} onOpenChange={setOpen}>
           <Dialog.Trigger asChild>
             <button
+              ref={menuTriggerRef}
               className="nav-toggle"
               aria-label={open ? "Close menu" : "Open menu"}
             >
@@ -44,6 +46,10 @@ export default function Header() {
             <Dialog.Content
               className="mobile-nav-content"
               aria-describedby={undefined}
+              onCloseAutoFocus={(event) => {
+                event.preventDefault();
+                menuTriggerRef.current?.focus({ preventScroll: true });
+              }}
             >
               <Dialog.Title style={{ position: "absolute", opacity: 0 }}>
                 Menu
