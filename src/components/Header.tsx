@@ -31,6 +31,7 @@ export default function Header() {
   const [suppressStateAnimation, setSuppressStateAnimation] = useState(false);
   const menuTriggerRef = useRef<HTMLButtonElement>(null);
   const hasToggledMenu = useRef(false);
+  const drawerDragRef = useRef<DrawerDrag | null>(null);
   const settleTimerRef = useRef<number | null>(null);
 
   useEffect(
@@ -67,46 +68,52 @@ export default function Header() {
       handleOpenChange(true);
     }
     event.currentTarget.setPointerCapture(event.pointerId);
-    setDrawerDrag({
+    const nextDrag: DrawerDrag = {
       mode,
       offset: mode === "open" ? width : 0,
       startX: event.clientX,
       startTime: performance.now(),
       width,
       settling: false,
-    });
+    };
+    drawerDragRef.current = nextDrag;
+    setDrawerDrag(nextDrag);
   };
 
   const updateDrawerDrag = (event: PointerEvent<HTMLDivElement>) => {
-    setDrawerDrag((current) => {
-      if (!current) return null;
-      if (current.settling) return current;
-      const delta = event.clientX - current.startX;
-      const offset =
-        current.mode === "open" ? current.width + delta : delta;
+    const current = drawerDragRef.current;
+    if (!current || current.settling) return;
 
-      return {
-        ...current,
-        offset: Math.max(0, Math.min(current.width, offset)),
-      };
-    });
+    const delta = event.clientX - current.startX;
+    const offset =
+      current.mode === "open" ? current.width + delta : delta;
+    const nextDrag = {
+      ...current,
+      offset: Math.max(0, Math.min(current.width, offset)),
+    };
+
+    drawerDragRef.current = nextDrag;
+    setDrawerDrag(nextDrag);
   };
 
   const finishDrawerDrag = (event: PointerEvent<HTMLDivElement>) => {
-    if (!drawerDrag) return;
+    const current = drawerDragRef.current;
+    if (!current || current.settling) return;
 
-    const elapsed = Math.max(performance.now() - drawerDrag.startTime, 1);
-    const velocity = (event.clientX - drawerDrag.startX) / elapsed;
+    const elapsed = Math.max(performance.now() - current.startTime, 1);
+    const velocity = (event.clientX - current.startX) / elapsed;
     const shouldOpen =
-      drawerDrag.mode === "open"
-        ? drawerDrag.offset < drawerDrag.width * 0.72 || velocity < -0.45
-        : !(drawerDrag.offset > drawerDrag.width * 0.28 || velocity > 0.45);
+      current.mode === "open"
+        ? current.offset < current.width * 0.72 || velocity < -0.45
+        : !(current.offset > current.width * 0.28 || velocity > 0.45);
 
-    setDrawerDrag({
-      ...drawerDrag,
-      offset: shouldOpen ? 0 : drawerDrag.width,
+    const settlingDrag = {
+      ...current,
+      offset: shouldOpen ? 0 : current.width,
       settling: true,
-    });
+    };
+    drawerDragRef.current = settlingDrag;
+    setDrawerDrag(settlingDrag);
 
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
@@ -114,6 +121,7 @@ export default function Header() {
     settleTimerRef.current = window.setTimeout(
       () => {
         setSuppressStateAnimation(true);
+        drawerDragRef.current = null;
         setDrawerDrag(null);
 
         if (!shouldOpen) {
