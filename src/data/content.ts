@@ -2,14 +2,14 @@
 
 export const pitch = {
   eyebrow: "Applied AI · Full-stack · Shipped in production",
-  headline: "I build AI products people actually use.",
+  headline: "I create simple products from complex problems.",
   subheadline:
-    "Machine learning, agentic AI, and full-stack engineering. I turn complex data into production systems serving thousands.",
+    "Machine learning, agentic AI, and full-stack engineering. I turn complex data into production systems built for real-world scale.",
 };
 
 export const philosophy = {
   kicker: "How I Work",
-  title: "The right system starts with the right question.",
+  title: "Clarity first. Then the right system.",
   intro:
     "I'm most useful when the opportunity is real but the shape of the solution isn't obvious yet.",
 };
