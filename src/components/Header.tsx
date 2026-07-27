@@ -1,6 +1,12 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { Menu, X } from "lucide-react";
-import { useRef, useState } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type CSSProperties,
+  type PointerEvent,
+} from "react";
 import Button from "./ui/Button";
 
 const links = [
@@ -10,9 +16,131 @@ const links = [
   { href: "#contact", label: "Contact" },
 ];
 
+type DrawerDrag = {
+  mode: "open" | "close";
+  offset: number;
+  startX: number;
+  startTime: number;
+  width: number;
+  settling: boolean;
+};
+
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const [drawerDrag, setDrawerDrag] = useState<DrawerDrag | null>(null);
+  const [suppressStateAnimation, setSuppressStateAnimation] = useState(false);
   const menuTriggerRef = useRef<HTMLButtonElement>(null);
+  const hasToggledMenu = useRef(false);
+  const settleTimerRef = useRef<number | null>(null);
+
+  useEffect(
+    () => () => {
+      if (settleTimerRef.current !== null) {
+        window.clearTimeout(settleTimerRef.current);
+      }
+    },
+    [],
+  );
+
+  const handleOpenChange = (nextOpen: boolean) => {
+    hasToggledMenu.current = true;
+    setSuppressStateAnimation(false);
+    setOpen(nextOpen);
+  };
+
+  const menuMotionClass = hasToggledMenu.current
+    ? open
+      ? " menu-button-opening"
+      : " menu-button-closing"
+    : "";
+
+  const beginDrawerDrag = (
+    event: PointerEvent<HTMLDivElement>,
+    mode: DrawerDrag["mode"],
+  ) => {
+    if (settleTimerRef.current !== null) {
+      window.clearTimeout(settleTimerRef.current);
+      settleTimerRef.current = null;
+    }
+    const width = Math.min(window.innerWidth * 0.85, 352);
+    if (mode === "open") {
+      handleOpenChange(true);
+    }
+    event.currentTarget.setPointerCapture(event.pointerId);
+    setDrawerDrag({
+      mode,
+      offset: mode === "open" ? width : 0,
+      startX: event.clientX,
+      startTime: performance.now(),
+      width,
+      settling: false,
+    });
+  };
+
+  const updateDrawerDrag = (event: PointerEvent<HTMLDivElement>) => {
+    setDrawerDrag((current) => {
+      if (!current) return null;
+      if (current.settling) return current;
+      const delta = event.clientX - current.startX;
+      const offset =
+        current.mode === "open" ? current.width + delta : delta;
+
+      return {
+        ...current,
+        offset: Math.max(0, Math.min(current.width, offset)),
+      };
+    });
+  };
+
+  const finishDrawerDrag = (event: PointerEvent<HTMLDivElement>) => {
+    if (!drawerDrag) return;
+
+    const elapsed = Math.max(performance.now() - drawerDrag.startTime, 1);
+    const velocity = (event.clientX - drawerDrag.startX) / elapsed;
+    const shouldOpen =
+      drawerDrag.mode === "open"
+        ? drawerDrag.offset < drawerDrag.width * 0.72 || velocity < -0.45
+        : !(drawerDrag.offset > drawerDrag.width * 0.28 || velocity > 0.45);
+
+    setDrawerDrag({
+      ...drawerDrag,
+      offset: shouldOpen ? 0 : drawerDrag.width,
+      settling: true,
+    });
+
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    settleTimerRef.current = window.setTimeout(
+      () => {
+        setSuppressStateAnimation(true);
+        setDrawerDrag(null);
+
+        if (!shouldOpen) {
+          hasToggledMenu.current = true;
+          setOpen(false);
+          window.setTimeout(() => setSuppressStateAnimation(false), 0);
+        }
+        settleTimerRef.current = null;
+      },
+      prefersReducedMotion ? 0 : 240,
+    );
+  };
+
+  const drawerStyle = drawerDrag
+    ? ({
+        "--drawer-drag-offset": `${drawerDrag.offset}px`,
+      } as CSSProperties)
+    : undefined;
+  const overlayStyle = drawerDrag
+    ? { opacity: 1 - drawerDrag.offset / drawerDrag.width }
+    : undefined;
+  const drawerGestureClass = drawerDrag
+    ? ` is-dragging${drawerDrag.settling ? " is-settling" : ""}`
+    : "";
+  const stateAnimationClass = suppressStateAnimation
+    ? " suppress-state-animation"
+    : "";
 
   return (
     <header className="site-header">
@@ -32,20 +160,37 @@ export default function Header() {
           <Button variant="primary" size="sm" href="#contact">Get in touch</Button>
         </nav>
 
-        <Dialog.Root open={open} onOpenChange={setOpen}>
-          <Dialog.Trigger asChild>
-            <button
-              ref={menuTriggerRef}
-              className="nav-toggle"
-              aria-label={open ? "Close menu" : "Open menu"}
-            >
-              <Menu aria-hidden />
-            </button>
-          </Dialog.Trigger>
+        <Dialog.Root open={open} onOpenChange={handleOpenChange}>
+          <button
+            ref={menuTriggerRef}
+            type="button"
+            className={`nav-toggle${menuMotionClass}`}
+            aria-label="Open menu"
+            aria-expanded={open}
+            aria-controls="mobile-navigation-drawer"
+            onClick={() => handleOpenChange(true)}
+          >
+            <Menu aria-hidden />
+          </button>
+          {(!open || drawerDrag?.mode === "open") && (
+            <div
+              className="drawer-edge-swipe"
+              aria-hidden="true"
+              onPointerDown={(event) => beginDrawerDrag(event, "open")}
+              onPointerMove={updateDrawerDrag}
+              onPointerUp={finishDrawerDrag}
+              onPointerCancel={finishDrawerDrag}
+            />
+          )}
           <Dialog.Portal>
-            <Dialog.Overlay className="mobile-nav-overlay" />
+            <Dialog.Overlay
+              className={`mobile-nav-overlay${drawerGestureClass}${stateAnimationClass}`}
+              style={overlayStyle}
+            />
             <Dialog.Content
-              className="mobile-nav-content"
+              id="mobile-navigation-drawer"
+              className={`mobile-nav-content${drawerGestureClass}${stateAnimationClass}`}
+              style={drawerStyle}
               aria-describedby={undefined}
               onCloseAutoFocus={(event) => {
                 event.preventDefault();
@@ -55,18 +200,39 @@ export default function Header() {
               <Dialog.Title style={{ position: "absolute", opacity: 0 }}>
                 Menu
               </Dialog.Title>
+              <div
+                className="drawer-drag-handle"
+                aria-hidden="true"
+                onPointerDown={(event) => beginDrawerDrag(event, "close")}
+                onPointerMove={updateDrawerDrag}
+                onPointerUp={finishDrawerDrag}
+                onPointerCancel={finishDrawerDrag}
+              >
+                <span />
+              </div>
               <Dialog.Close asChild>
-                <button className="nav-toggle" aria-label="Close menu">
+                <button
+                  className={`nav-toggle${menuMotionClass}`}
+                  aria-label="Close menu"
+                >
                   <X aria-hidden />
                 </button>
               </Dialog.Close>
               <nav className="mobile-nav" aria-label="Primary">
                 {links.map((l) => (
-                  <a key={l.href} href={l.href} onClick={() => setOpen(false)}>
+                  <a
+                    key={l.href}
+                    href={l.href}
+                    onClick={() => handleOpenChange(false)}
+                  >
                     {l.label}
                   </a>
                 ))}
-                <Button variant="primary" href="#contact" onClick={() => setOpen(false)}>
+                <Button
+                  variant="primary"
+                  href="#contact"
+                  onClick={() => handleOpenChange(false)}
+                >
                   Get in touch
                 </Button>
               </nav>

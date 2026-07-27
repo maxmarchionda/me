@@ -250,8 +250,39 @@ a {
 .mobile-nav-overlay {
   position: fixed;
   inset: 0;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
   background: rgba(0, 0, 0, 0.7);
   z-index: 30;
+  transition:
+    opacity var(--duration-fast) var(--ease-out),
+    visibility 0s linear var(--duration-fast);
+}
+
+.mobile-nav-overlay[data-state="open"] {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+  animation: mobile-overlay-in var(--duration-normal) var(--ease-out) both;
+  transition:
+    opacity var(--duration-normal) var(--ease-out),
+    visibility 0s linear;
+}
+
+.mobile-nav-overlay.is-dragging {
+  visibility: visible;
+  pointer-events: none;
+  animation: none;
+  transition: none;
+}
+
+.mobile-nav-overlay.is-dragging.is-settling {
+  transition: opacity var(--duration-normal) var(--ease-out);
+}
+
+.mobile-nav-overlay[data-state="closed"] {
+  animation: mobile-overlay-out var(--duration-fast) var(--ease-out) both;
 }
 
 .mobile-nav-content {
@@ -266,9 +297,133 @@ a {
   padding: var(--space-5);
   display: flex;
   flex-direction: column;
+  visibility: hidden;
+  opacity: 0.9;
+  pointer-events: none;
+  transform: translateX(100%);
   transition:
+    transform var(--duration-fast) var(--ease-out),
+    opacity var(--duration-fast) var(--ease-out),
+    visibility 0s linear var(--duration-fast),
     background-color var(--duration-normal) var(--ease-out),
     border-color var(--duration-normal) var(--ease-out);
+}
+
+.mobile-nav-content[data-state="open"] {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0);
+  animation: mobile-drawer-in var(--duration-normal) var(--ease-out) both;
+  transition:
+    transform var(--duration-normal) var(--ease-out),
+    opacity var(--duration-normal) var(--ease-out),
+    visibility 0s linear,
+    background-color var(--duration-normal) var(--ease-out),
+    border-color var(--duration-normal) var(--ease-out);
+}
+
+.mobile-nav-content.is-dragging {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(var(--drawer-drag-offset));
+  animation: none;
+  transition: none;
+}
+
+.mobile-nav-content.is-dragging.is-settling {
+  transition:
+    transform var(--duration-normal) var(--ease-out),
+    opacity var(--duration-normal) var(--ease-out);
+}
+
+.mobile-nav-content[data-state="closed"] {
+  animation: mobile-drawer-out var(--duration-fast) var(--ease-out) both;
+  pointer-events: none;
+}
+
+.mobile-nav-overlay.suppress-state-animation,
+.mobile-nav-content.suppress-state-animation {
+  animation: none;
+}
+
+.menu-button-opening {
+  animation: menu-button-open var(--duration-normal) var(--ease-out);
+}
+
+.menu-button-closing {
+  animation: menu-button-close var(--duration-normal) var(--ease-out);
+}
+
+@keyframes mobile-overlay-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes mobile-overlay-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes mobile-drawer-in {
+  from {
+    opacity: 0.9;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes mobile-drawer-out {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0.9;
+    transform: translateX(100%);
+  }
+}
+
+@keyframes menu-button-open {
+  0% {
+    transform: scale(1) rotate(0);
+  }
+  45% {
+    transform: scale(0.88) rotate(-7deg);
+  }
+  72% {
+    transform: scale(1.04) rotate(3deg);
+  }
+  100% {
+    transform: scale(1) rotate(0);
+  }
+}
+
+@keyframes menu-button-close {
+  0% {
+    transform: scale(1) rotate(0);
+  }
+  45% {
+    transform: scale(0.88) rotate(7deg);
+  }
+  72% {
+    transform: scale(1.04) rotate(-3deg);
+  }
+  100% {
+    transform: scale(1) rotate(0);
+  }
 }
 
 .mobile-nav-content .nav-toggle {
@@ -278,6 +433,48 @@ a {
   z-index: 32;
   display: inline-flex;
   margin: 0;
+}
+
+.drawer-edge-swipe {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 29;
+  width: 1.25rem;
+  height: 100dvh;
+  touch-action: none;
+}
+
+@media (max-width: 720px) {
+  .drawer-edge-swipe {
+    display: block;
+  }
+}
+
+.drawer-drag-handle {
+  position: absolute;
+  top: 4rem;
+  bottom: 0;
+  left: 0;
+  width: 1.5rem;
+  cursor: grab;
+  touch-action: none;
+}
+
+.drawer-drag-handle:active {
+  cursor: grabbing;
+}
+
+.drawer-drag-handle span {
+  position: absolute;
+  top: 50%;
+  left: 0.4rem;
+  width: 0.25rem;
+  height: 3rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-border-strong);
+  transform: translateY(-50%);
 }
 
 .mobile-nav {
@@ -1702,8 +1899,17 @@ a {
   .glow-hover-card::before,
   .smooth-stepper .process-step::before,
   .shimmer-sweep::after,
-  .theme-icon-swap svg {
+  .theme-icon-swap svg,
+  .mobile-nav-overlay,
+  .mobile-nav-content,
+  .menu-button-opening,
+  .menu-button-closing {
+    animation: none;
     transition: none;
+  }
+
+  .mobile-nav-content[data-state="open"] {
+    transform: translateX(0);
   }
 
   .reveal,
