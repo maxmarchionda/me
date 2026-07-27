@@ -127,7 +127,7 @@ body {
 .site-nav a:not(.button)::after {
   bottom: -8px;
   height: 3px;
-  border-radius: 0;
+  border-radius: var(--radius-pill);
 }
 
 .site-nav .button.primary {
@@ -149,7 +149,7 @@ body {
   min-height: 3rem;
   padding: 0.75rem 1.15rem;
   border: 2px solid var(--color-text);
-  border-radius: 0;
+  border-radius: var(--radius-md);
   color: var(--color-text);
   background: var(--color-bg);
   font-family: var(--font-display);
@@ -354,9 +354,11 @@ body {
 
 .capability-grid {
   grid-template-columns: 1.15fr 0.85fr;
-  gap: 0;
+  gap: 2px;
   border: 2px solid var(--color-text);
+  border-radius: var(--radius-xl);
   background: var(--color-text);
+  overflow: hidden;
 }
 
 .capability-card,
@@ -367,7 +369,7 @@ body {
   min-height: 19rem;
   padding: clamp(var(--space-5), 4vw, var(--space-7));
   border: 0;
-  border-radius: 0;
+  border-radius: var(--radius-lg);
   box-shadow: none;
   background: var(--color-bg);
   outline: 1px solid var(--color-text);
@@ -410,15 +412,34 @@ body {
   grid-area: tags;
 }
 
-.capability-card:hover {
-  z-index: 2;
-  transform: translate(-5px, -5px);
-  border-color: transparent;
-  box-shadow: 9px 9px 0 var(--color-ink-secondary);
+.capability-card,
+.hobby-card {
+  outline: 0;
+  box-shadow: inset 0 0 0 1px var(--color-text);
 }
 
-.capability-card-1:hover {
-  box-shadow: 9px 9px 0 var(--color-text);
+@media (hover: hover) and (pointer: fine) {
+  .capability-card:hover,
+  .hobby-card:hover {
+    z-index: 2;
+    transform: none;
+    border-color: transparent;
+    box-shadow: inset 0 0 0 2px var(--color-accent);
+  }
+
+  .capability-card-1:hover,
+  .hobby-card:first-child:hover {
+    box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.82);
+  }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .capability-card:hover,
+  .hobby-card:hover {
+    transform: none;
+    border-color: var(--color-text);
+    box-shadow: inset 0 0 0 1px var(--color-text);
+  }
 }
 
 .capability-card h3,
@@ -452,7 +473,7 @@ body {
 .capability-tags span {
   padding: 0.35rem 0.5rem;
   border: 1px solid var(--color-border-strong);
-  border-radius: 0;
+  border-radius: var(--radius-pill);
   background: transparent;
   color: currentColor;
   font-size: 0.62rem;
@@ -480,8 +501,10 @@ body {
 
 .process-grid {
   border: 2px solid var(--color-text);
+  border-radius: var(--radius-xl);
   background: var(--color-text);
   gap: 2px;
+  overflow: hidden;
 }
 
 .process-step,
@@ -492,6 +515,7 @@ body {
   min-height: 20rem;
   padding: 1.5rem;
   border: 0;
+  border-radius: var(--radius-lg);
   background: var(--color-bg);
 }
 
@@ -503,7 +527,6 @@ body {
   width: auto;
   height: auto;
   border: 0;
-  border-radius: 0;
   background: transparent;
   color: var(--color-accent);
   font-size: 2.5rem;
@@ -524,8 +547,21 @@ body {
 
 .smooth-stepper .process-step::before {
   top: auto;
-  bottom: 0;
-  height: 8px;
+  bottom: 0.75rem;
+  left: 1.5rem;
+  width: calc(100% - 3rem);
+  height: 4px;
+  border-radius: var(--radius-pill);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--duration-normal) var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .smooth-stepper .process-step:hover::before {
+    width: calc(100% - 3rem);
+    transform: scaleX(1);
+  }
 }
 
 /* Track record: monochrome catalog */
@@ -540,10 +576,12 @@ body {
 .stat-grid {
   grid-template-columns: 1.2fr 1fr 1fr;
   border: 2px solid var(--color-text);
+  border-radius: var(--radius-xl);
   margin: 0 0 clamp(3rem, 7vw, 6rem);
   padding: 0;
   background: var(--color-text);
   gap: 2px;
+  overflow: hidden;
 }
 
 .stat-grid > div,
@@ -552,6 +590,7 @@ body {
   min-height: 17rem;
   padding: clamp(var(--space-5), 3vw, var(--space-6));
   border: 0;
+  border-radius: var(--radius-lg);
   background: var(--color-bg);
 }
 
@@ -576,7 +615,7 @@ body {
 .role-card {
   padding: clamp(var(--space-5), 5vw, var(--space-8));
   border: 2px solid var(--color-text);
-  border-radius: 0;
+  border-radius: var(--radius-xl);
   background: var(--color-surface);
   box-shadow: 10px 10px 0 var(--color-ink-secondary);
 }
@@ -638,7 +677,7 @@ body {
   align-items: flex-end;
   padding: clamp(var(--space-5), 4vw, var(--space-7));
   border: 2px solid #fff;
-  border-radius: 0;
+  border-radius: var(--radius-xl);
   background: transparent;
   box-shadow: 10px 10px 0 #111;
 }
@@ -678,9 +717,11 @@ body {
 
 .hobby-grid {
   grid-template-columns: 1.2fr 0.8fr 0.8fr;
-  gap: 0;
+  gap: 2px;
   border: 2px solid var(--color-text);
+  border-radius: var(--radius-xl);
   background: var(--color-text);
+  overflow: hidden;
 }
 
 .hobby-card {
@@ -691,10 +732,9 @@ body {
   min-height: 19rem;
   padding: 1.5rem;
   border: 0;
-  border-radius: 0;
+  border-radius: var(--radius-lg);
   background: var(--color-bg);
-  outline: 1px solid var(--color-text);
-  box-shadow: none;
+  outline: 0;
 }
 
 .hobby-card:first-child {
@@ -741,7 +781,7 @@ body {
   aspect-ratio: auto !important;
   min-width: 0;
   border: 1px solid var(--color-text);
-  border-radius: 0;
+  border-radius: var(--radius-md);
 }
 
 .hobby-card .photo-grid button:nth-child(1) {
@@ -770,13 +810,13 @@ body {
 }
 
 .spotify-card {
-  border-radius: 0;
+  border-radius: var(--radius-lg);
   background: color-mix(in srgb, var(--color-bg) 82%, transparent);
 }
 
 .interest-tags span {
   border: 1px solid var(--color-text);
-  border-radius: 0;
+  border-radius: var(--radius-pill);
   background: transparent;
 }
 
@@ -802,27 +842,20 @@ body {
 .contact-list {
   display: grid;
   grid-template-columns: minmax(0, 1.5fr) repeat(2, minmax(0, 0.75fr));
-  gap: 0;
-  border-top: 2px solid var(--color-text);
-  border-bottom: 2px solid var(--color-text);
+  gap: var(--space-2);
+  border: 0;
 }
 
 .social-link {
   justify-content: flex-start;
   gap: var(--space-4);
   min-height: 4.5rem;
-  border: 0;
-  border-right: 1px solid var(--color-border);
-  border-bottom: 0;
-  border-radius: 0;
+  border: 2px solid var(--color-text);
+  border-radius: var(--radius-lg);
   color: var(--color-text);
   font-family: var(--font-display);
   font-size: clamp(1rem, 2vw, 1.4rem);
   font-weight: 700;
-}
-
-.social-link:last-child {
-  border-right: 0;
 }
 
 .social-link:hover {
@@ -864,7 +897,7 @@ body {
 
 .mobile-nav-content {
   border-left: 2px solid var(--color-text);
-  border-radius: 0;
+  border-radius: var(--radius-xl) 0 0 var(--radius-xl);
   background-color: var(--color-bg);
   background-image:
     linear-gradient(var(--color-paper-grid) 1px, transparent 1px),
@@ -874,7 +907,7 @@ body {
 
 .nav-toggle {
   border: 2px solid var(--color-text);
-  border-radius: 0;
+  border-radius: var(--radius-pill);
 }
 
 /* Motion stays structural: reveal hierarchy, not decoration */
@@ -1016,6 +1049,24 @@ body {
   .stat-grid,
   .hobby-grid {
     grid-template-columns: 1fr;
+    gap: var(--space-3);
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    overflow: visible;
+  }
+
+  .capability-card,
+  .process-step,
+  .process-step:first-child,
+  .process-step:last-child,
+  .stat-grid > div,
+  .stat-grid > div:first-child,
+  .stat-grid > div:last-child,
+  .hobby-card {
+    border: 2px solid var(--color-text);
+    border-radius: var(--radius-lg);
+    box-shadow: none;
   }
 
   .capability-card-1,
@@ -1133,15 +1184,6 @@ body {
 
   .contact-list {
     grid-template-columns: 1fr;
-  }
-
-  .social-link {
-    border-right: 0;
-    border-bottom: 1px solid var(--color-border);
-  }
-
-  .social-link:last-child {
-    border-bottom: 0;
   }
 
   #contact .section-title {

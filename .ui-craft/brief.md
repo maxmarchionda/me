@@ -24,3 +24,7 @@ Direct, grounded, technically fluent, and warm. Prefer specific outcomes over ge
 - `prefers-reduced-motion` must deliver every state without decorative animation.
 - Preserve content while allowing asymmetric, high-variance compositions.
 - The technical landscape motif is the single signature visual; other decoration stays restrained.
+
+## Learned constraints
+
+- **2026-07-26** — Use a rounded shape language throughout the interface, with a clear radius hierarchy across controls, cards, media, and panels. *Why:* the site should feel softer and more approachable rather than boxy or hard-edged.

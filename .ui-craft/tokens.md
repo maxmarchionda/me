@@ -20,7 +20,7 @@
 
 ## Radius
 
-2px editorial frames, 8px media, 14px overlays, pill only for the floating theme control.
+8px compact controls, 12px buttons and media, 18px cards, 26px panels and overlays, and pills for tags and floating controls.
 
 ## Shadows
 
