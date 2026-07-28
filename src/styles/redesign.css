@@ -1059,12 +1059,15 @@ body {
   .capability-card,
   .process-step,
   .process-step:first-child,
+  .process-step:nth-child(2),
+  .process-step:nth-child(3),
   .process-step:last-child,
   .stat-grid > div,
   .stat-grid > div:first-child,
   .stat-grid > div:last-child,
   .hobby-card {
     border: 2px solid var(--color-text);
+    border-right: 2px solid var(--color-text);
     border-radius: var(--radius-lg);
     box-shadow: none;
   }
