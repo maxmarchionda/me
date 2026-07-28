@@ -23,6 +23,7 @@ type DrawerDrag = {
   startTime: number;
   width: number;
   settling: boolean;
+  settleDuration: number;
 };
 
 export default function Header() {
@@ -75,6 +76,7 @@ export default function Header() {
       startTime: performance.now(),
       width,
       settling: false,
+      settleDuration: 0,
     };
     drawerDragRef.current = nextDrag;
     setDrawerDrag(nextDrag);
@@ -102,22 +104,29 @@ export default function Header() {
 
     const elapsed = Math.max(performance.now() - current.startTime, 1);
     const velocity = (event.clientX - current.startX) / elapsed;
-    const shouldOpen =
-      current.mode === "open"
-        ? current.offset < current.width * 0.72 || velocity < -0.45
-        : !(current.offset > current.width * 0.28 || velocity > 0.45);
+    const projectedOffset = Math.max(
+      0,
+      Math.min(current.width, current.offset + velocity * 180),
+    );
+    const shouldOpen = projectedOffset < current.width * 0.5;
+    const targetOffset = shouldOpen ? 0 : current.width;
+    const distance = Math.abs(targetOffset - current.offset);
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    const settleDuration = prefersReducedMotion
+      ? 0
+      : Math.round(160 + (distance / current.width) * 160);
 
     const settlingDrag = {
       ...current,
-      offset: shouldOpen ? 0 : current.width,
+      offset: targetOffset,
       settling: true,
+      settleDuration,
     };
     drawerDragRef.current = settlingDrag;
     setDrawerDrag(settlingDrag);
 
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
     settleTimerRef.current = window.setTimeout(
       () => {
         setSuppressStateAnimation(true);
@@ -127,21 +136,24 @@ export default function Header() {
         if (!shouldOpen) {
           hasToggledMenu.current = true;
           setOpen(false);
-          window.setTimeout(() => setSuppressStateAnimation(false), 0);
         }
         settleTimerRef.current = null;
       },
-      prefersReducedMotion ? 0 : 240,
+      settleDuration,
     );
   };
 
   const drawerStyle = drawerDrag
     ? ({
         "--drawer-drag-offset": `${drawerDrag.offset}px`,
+        "--drawer-settle-duration": `${drawerDrag.settleDuration}ms`,
       } as CSSProperties)
     : undefined;
   const overlayStyle = drawerDrag
-    ? { opacity: 1 - drawerDrag.offset / drawerDrag.width }
+    ? ({
+        opacity: 1 - drawerDrag.offset / drawerDrag.width,
+        "--drawer-settle-duration": `${drawerDrag.settleDuration}ms`,
+      } as CSSProperties)
     : undefined;
   const drawerGestureClass = drawerDrag
     ? ` is-dragging${drawerDrag.settling ? " is-settling" : ""}`
@@ -200,6 +212,15 @@ export default function Header() {
               className={`mobile-nav-content${drawerGestureClass}${stateAnimationClass}`}
               style={drawerStyle}
               aria-describedby={undefined}
+              onPointerDown={(event) => {
+                const drawerBounds = event.currentTarget.getBoundingClientRect();
+                if (event.clientX <= drawerBounds.left + 44) {
+                  beginDrawerDrag(event, "close");
+                }
+              }}
+              onPointerMove={updateDrawerDrag}
+              onPointerUp={finishDrawerDrag}
+              onPointerCancel={finishDrawerDrag}
               onCloseAutoFocus={(event) => {
                 event.preventDefault();
                 menuTriggerRef.current?.focus({ preventScroll: true });
@@ -211,10 +232,6 @@ export default function Header() {
               <div
                 className="drawer-drag-handle"
                 aria-hidden="true"
-                onPointerDown={(event) => beginDrawerDrag(event, "close")}
-                onPointerMove={updateDrawerDrag}
-                onPointerUp={finishDrawerDrag}
-                onPointerCancel={finishDrawerDrag}
               >
                 <span />
               </div>

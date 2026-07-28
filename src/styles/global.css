@@ -248,6 +248,7 @@ a {
 }
 
 .mobile-nav-overlay {
+  --drawer-ease: cubic-bezier(0.32, 0.72, 0, 1);
   position: fixed;
   inset: 0;
   visibility: hidden;
@@ -264,7 +265,7 @@ a {
   visibility: visible;
   opacity: 1;
   pointer-events: auto;
-  animation: mobile-overlay-in var(--duration-normal) var(--ease-out) both;
+  animation: mobile-overlay-in 320ms var(--drawer-ease) both;
   transition:
     opacity var(--duration-normal) var(--ease-out),
     visibility 0s linear;
@@ -278,14 +279,15 @@ a {
 }
 
 .mobile-nav-overlay.is-dragging.is-settling {
-  transition: opacity var(--duration-normal) var(--ease-out);
+  transition: opacity var(--drawer-settle-duration) var(--drawer-ease);
 }
 
 .mobile-nav-overlay[data-state="closed"] {
-  animation: mobile-overlay-out var(--duration-fast) var(--ease-out) both;
+  animation: mobile-overlay-out 240ms var(--drawer-ease) both;
 }
 
 .mobile-nav-content {
+  --drawer-ease: cubic-bezier(0.32, 0.72, 0, 1);
   position: fixed;
   top: 0;
   right: 0;
@@ -314,7 +316,7 @@ a {
   opacity: 1;
   pointer-events: auto;
   transform: translateX(0);
-  animation: mobile-drawer-in var(--duration-normal) var(--ease-out) both;
+  animation: mobile-drawer-in 400ms var(--drawer-ease) both;
   transition:
     transform var(--duration-normal) var(--ease-out),
     opacity var(--duration-normal) var(--ease-out),
@@ -334,12 +336,12 @@ a {
 
 .mobile-nav-content.is-dragging.is-settling {
   transition:
-    transform var(--duration-normal) var(--ease-out),
-    opacity var(--duration-normal) var(--ease-out);
+    transform var(--drawer-settle-duration) var(--drawer-ease),
+    opacity var(--drawer-settle-duration) var(--drawer-ease);
 }
 
 .mobile-nav-content[data-state="closed"] {
-  animation: mobile-drawer-out var(--duration-fast) var(--ease-out) both;
+  animation: mobile-drawer-out 300ms var(--drawer-ease) both;
   pointer-events: none;
 }
 
@@ -568,7 +570,6 @@ a {
 }
 
 .button:focus-visible,
-.nav-toggle:focus-visible,
 .theme-fab:focus-visible,
 .back-to-top-fab:focus-visible,
 .social-link:focus-visible,
@@ -576,6 +577,12 @@ a {
   outline: 2px solid var(--color-accent);
   outline-offset: 3px;
   box-shadow: var(--focus-ring);
+}
+
+.nav-toggle:focus-visible {
+  outline: 2px solid var(--color-text);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-text) 14%, transparent);
 }
 
 .button:hover {
