@@ -288,6 +288,7 @@ a {
 
 .mobile-nav-content {
   --drawer-ease: cubic-bezier(0.32, 0.72, 0, 1);
+  touch-action: pan-y;
   position: fixed;
   top: 0;
   right: 0;
@@ -580,9 +581,13 @@ a {
 }
 
 .nav-toggle:focus-visible {
-  outline: 2px solid var(--color-text);
-  outline-offset: 3px;
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-text) 14%, transparent);
+  outline: none;
+  background: color-mix(in srgb, var(--color-text) 12%, transparent);
+  box-shadow: none;
+}
+
+.nav-toggle:focus-visible svg {
+  transform: scale(0.88);
 }
 
 .button:hover {

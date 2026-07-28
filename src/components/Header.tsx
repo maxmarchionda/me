@@ -30,6 +30,7 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   const [drawerDrag, setDrawerDrag] = useState<DrawerDrag | null>(null);
   const [suppressStateAnimation, setSuppressStateAnimation] = useState(false);
+  const [suppressButtonMotion, setSuppressButtonMotion] = useState(false);
   const menuTriggerRef = useRef<HTMLButtonElement>(null);
   const hasToggledMenu = useRef(false);
   const drawerDragRef = useRef<DrawerDrag | null>(null);
@@ -47,10 +48,11 @@ export default function Header() {
   const handleOpenChange = (nextOpen: boolean) => {
     hasToggledMenu.current = true;
     setSuppressStateAnimation(false);
+    setSuppressButtonMotion(false);
     setOpen(nextOpen);
   };
 
-  const menuMotionClass = hasToggledMenu.current
+  const menuMotionClass = !suppressButtonMotion && hasToggledMenu.current
     ? open
       ? " menu-button-opening"
       : " menu-button-closing"
@@ -66,8 +68,10 @@ export default function Header() {
     }
     const width = Math.min(window.innerWidth * 0.85, 352);
     if (mode === "open") {
-      handleOpenChange(true);
+      setSuppressStateAnimation(false);
+      setOpen(true);
     }
+    setSuppressButtonMotion(true);
     event.currentTarget.setPointerCapture(event.pointerId);
     const nextDrag: DrawerDrag = {
       mode,
@@ -101,6 +105,16 @@ export default function Header() {
   const finishDrawerDrag = (event: PointerEvent<HTMLDivElement>) => {
     const current = drawerDragRef.current;
     if (!current || current.settling) return;
+
+    if (
+      current.mode === "close" &&
+      Math.abs(event.clientX - current.startX) < 6
+    ) {
+      drawerDragRef.current = null;
+      setDrawerDrag(null);
+      setSuppressButtonMotion(false);
+      return;
+    }
 
     const elapsed = Math.max(performance.now() - current.startTime, 1);
     const velocity = (event.clientX - current.startX) / elapsed;
@@ -141,6 +155,20 @@ export default function Header() {
       },
       settleDuration,
     );
+  };
+
+  const cancelDrawerDrag = () => {
+    const current = drawerDragRef.current;
+    if (!current) return;
+
+    drawerDragRef.current = null;
+    setDrawerDrag(null);
+    setSuppressButtonMotion(false);
+
+    if (current.mode === "open") {
+      setSuppressStateAnimation(true);
+      setOpen(false);
+    }
   };
 
   const drawerStyle = drawerDrag
@@ -199,7 +227,7 @@ export default function Header() {
               onPointerDown={(event) => beginDrawerDrag(event, "open")}
               onPointerMove={updateDrawerDrag}
               onPointerUp={finishDrawerDrag}
-              onPointerCancel={finishDrawerDrag}
+              onPointerCancel={cancelDrawerDrag}
             />
           )}
           <Dialog.Portal>
@@ -212,15 +240,10 @@ export default function Header() {
               className={`mobile-nav-content${drawerGestureClass}${stateAnimationClass}`}
               style={drawerStyle}
               aria-describedby={undefined}
-              onPointerDown={(event) => {
-                const drawerBounds = event.currentTarget.getBoundingClientRect();
-                if (event.clientX <= drawerBounds.left + 44) {
-                  beginDrawerDrag(event, "close");
-                }
-              }}
+              onPointerDown={(event) => beginDrawerDrag(event, "close")}
               onPointerMove={updateDrawerDrag}
               onPointerUp={finishDrawerDrag}
-              onPointerCancel={finishDrawerDrag}
+              onPointerCancel={cancelDrawerDrag}
               onCloseAutoFocus={(event) => {
                 event.preventDefault();
                 menuTriggerRef.current?.focus({ preventScroll: true });
