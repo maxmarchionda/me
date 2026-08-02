@@ -35,12 +35,21 @@ export default function Header() {
   const hasToggledMenu = useRef(false);
   const drawerDragRef = useRef<DrawerDrag | null>(null);
   const settleTimerRef = useRef<number | null>(null);
+  const dragRafRef = useRef<number | null>(null);
+
+  const cancelDragRaf = () => {
+    if (dragRafRef.current !== null) {
+      window.cancelAnimationFrame(dragRafRef.current);
+      dragRafRef.current = null;
+    }
+  };
 
   useEffect(
     () => () => {
       if (settleTimerRef.current !== null) {
         window.clearTimeout(settleTimerRef.current);
       }
+      cancelDragRaf();
     },
     [],
   );
@@ -62,6 +71,7 @@ export default function Header() {
     event: PointerEvent<HTMLDivElement>,
     mode: DrawerDrag["mode"],
   ) => {
+    if ((event.target as HTMLElement).closest("a, button")) return;
     if (settleTimerRef.current !== null) {
       window.clearTimeout(settleTimerRef.current);
       settleTimerRef.current = null;
@@ -99,12 +109,18 @@ export default function Header() {
     };
 
     drawerDragRef.current = nextDrag;
-    setDrawerDrag(nextDrag);
+    if (dragRafRef.current === null) {
+      dragRafRef.current = window.requestAnimationFrame(() => {
+        dragRafRef.current = null;
+        setDrawerDrag(drawerDragRef.current);
+      });
+    }
   };
 
   const finishDrawerDrag = (event: PointerEvent<HTMLDivElement>) => {
     const current = drawerDragRef.current;
     if (!current || current.settling) return;
+    cancelDragRaf();
 
     if (
       current.mode === "close" &&
@@ -160,6 +176,7 @@ export default function Header() {
   const cancelDrawerDrag = () => {
     const current = drawerDragRef.current;
     if (!current) return;
+    cancelDragRaf();
 
     drawerDragRef.current = null;
     setDrawerDrag(null);

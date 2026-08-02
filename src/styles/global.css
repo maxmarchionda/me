@@ -705,94 +705,8 @@ a {
   color: var(--color-text-muted);
 }
 
-/* Hero visual: Magic UI Terminal adapted to the semantic token system */
 .hero-visual {
   position: relative;
-}
-
-.magic-grid-pattern {
-  position: absolute;
-  inset: -12% -8% auto auto;
-  width: min(62rem, 72vw);
-  height: 42rem;
-  color: var(--color-accent);
-  opacity: 0.12;
-  pointer-events: none;
-}
-
-.hero-terminal {
-  background: var(--color-surface);
-  border: var(--border-width) solid var(--color-border);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-raised);
-  overflow: hidden;
-  transition:
-    background-color var(--duration-normal) var(--ease-out),
-    border-color var(--duration-normal) var(--ease-out);
-}
-
-.hero-terminal-bar {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-  padding: var(--space-3) var(--space-4);
-  border-bottom: var(--border-width) solid var(--color-border);
-  background: var(--color-surface-raised);
-}
-
-.hero-terminal-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: var(--color-border-strong);
-}
-
-.hero-terminal-title {
-  margin-left: var(--space-2);
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  color: var(--color-text-faint);
-  letter-spacing: var(--tracking-wide);
-}
-
-.hero-terminal-body {
-  padding: var(--space-5);
-  font-family: var(--font-mono);
-  font-size: var(--text-sm);
-  line-height: var(--leading-relaxed);
-}
-
-.hero-terminal-command {
-  color: var(--color-text-muted);
-  margin: 0 0 var(--space-3);
-}
-
-.hero-terminal-command::before {
-  content: "❯ ";
-  color: var(--color-accent);
-}
-
-.hero-terminal-line {
-  display: flex;
-  align-items: baseline;
-  gap: var(--space-2);
-  color: var(--color-text-faint);
-}
-
-.hero-terminal-line + .hero-terminal-line {
-  margin-top: var(--space-2);
-}
-
-.hero-terminal-line .check {
-  color: var(--color-positive);
-  width: 14px;
-  height: 14px;
-  flex: 0 0 14px;
-}
-
-.hero-terminal-line .metric {
-  color: var(--color-text);
-  font-weight: var(--weight-medium);
 }
 
 /* ---------- Philosophy / pull quote ---------- */
@@ -1799,7 +1713,6 @@ a {
   }
 }
 
-[data-theme="dark"] .hero-terminal,
 [data-theme="dark"] .capability-card,
 [data-theme="dark"] .role-card,
 [data-theme="dark"] .building-card,

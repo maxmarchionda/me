@@ -34,9 +34,9 @@ export function useTheme() {
   }, [theme]);
 
   useEffect(() => {
-    if (localStorage.getItem(STORAGE_KEY)) return;
     const media = window.matchMedia("(prefers-color-scheme: light)");
     const onChange = (e: MediaQueryListEvent) => {
+      if (localStorage.getItem(STORAGE_KEY)) return;
       setTheme(e.matches ? "light" : "dark");
     };
     media.addEventListener("change", onChange);

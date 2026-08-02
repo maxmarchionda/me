@@ -25,6 +25,7 @@ export function useNowPlaying(): NowPlayingState {
     let cancelled = false;
 
     async function load() {
+      if (document.hidden) return;
       try {
         const res = await fetch("/api/now-playing");
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -39,9 +40,11 @@ export function useNowPlaying(): NowPlayingState {
 
     load();
     const id = setInterval(load, POLL_MS);
+    document.addEventListener("visibilitychange", load);
     return () => {
       cancelled = true;
       clearInterval(id);
+      document.removeEventListener("visibilitychange", load);
     };
   }, []);
 
